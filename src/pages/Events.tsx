@@ -9,6 +9,8 @@ const flyers = {
   gen1torship: `event-images/gen1torship.png`,
   crackTheEggs: `event-images/crack-the-eggs.png`,
   amazonJrDev: `event-images/amazon-jr-dev.png`,
+  firstToFounder: `event-images/first-to-founder.png`,
+  firstGenGrad: `event-images/first-gen-grad.png`
 };
 
 const ongoingEvents = [
@@ -32,40 +34,19 @@ const ongoingEvents = [
     flyer: flyers.gen1torship,
     rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSfhcM7k5-yz1-9sMzJNPXem0ndouEbFXiJQI51fhchS6LOxGQ/viewform?usp=header"
   },
-  {
-    title: "Crack the Eggs",
-    time: "N/A",
-    location: "N/A",
-    description:
-      "We're celebrating spring by hiding Easter eggs all around campus! Inside each egg? A QR code you can scan to claim prizes like Mariners merch 🧢, portable battery packs 🔋, plus more with a GRAND PRIZE dropping the last week (April 30th)!",
-    type: "Social",
-    flyer: flyers.crackTheEggs,
-    rsvp: null
-  }
 ]
 
 const upcomingEvents = [
   {
-    title: "Amazon Jr. Dev Information Session",
-    date: "April 16, 2026",
-    time: "6:00 PM - 8:00 PM",
-    location: "TBD",
+    title: "Intern Tea",
+    date: "May 5th, 2026",
+    time: "5:30 PM - 7:00 PM",
+    location: "CSE2 G01",
     description:
-      "GEN1 and other UW CS clubs are partnering with Amazon’s Jr. Developer Program to host an Information Session for UW students interested in a Software Development Engineering internship!",
-    type: "Career",
-    flyer: flyers.amazonJrDev,
-    rsvp: "https://uw.joinhandshake.com/stu/events/1928503"
-  },
-  {
-    title: "Intern Panel",
-    date: "TBD",
-    time: "5:00 PM - 7:00 PM",
-    location: "TBD",
-    description:
-      "",
+      "Curious about what internships are actually like beyond the application process? Join GEN1 for Intern Tea, a panel where students who interned at different companies (Duolingo, Microsoft, SAS, etc.) will share the real day-to-day of their internship experiences and what helped them succeed once they got there.",
     type: "Panel",
     flyer: null,
-    rsvp: null
+    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSe9AwFB_GznYp4VJgVMzI9xSGz1NYBHG34g84plgTyK52axEA/viewform?usp=header"
   },
   {
     title: "First to Founder",
@@ -73,10 +54,10 @@ const upcomingEvents = [
     time: "5:00 PM - 7:00 PM",
     location: "CSE2 G10",
     description:
-      "",
+      "Join us for First to Founder, a panel featuring our incredible speakers David Geller (Founder and CEO of Spryly) and Ken Horenstein (Founder and Partner of Pack Ventures), to learn more about their entrepreneurial journeys and for a chance to connect with them! This will be a truly informative experience, so be sure to join us!",
     type: "Panel",
-    flyer: null,
-    rsvp: null
+    flyer: flyers.firstToFounder,
+    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSdlz7bz_FpjfX1F1fu2MllODZOmF60jbRS6tis0Jeq1DjNULQ/viewform?usp=header"
   },
   {
     title: "First Gen Grad",
@@ -84,27 +65,27 @@ const upcomingEvents = [
     time: "4:30 PM - 7:00 PM",
     location: "Zillow Commons",
     description:
-      "This will be a meaningful opportunity to celebrate the accomplishments of the Allen School first-generation community, and we would love for you to join us in recognizing and uplifting our graduates.",
+      "Congratulations to all first-generation Allen School grads! Your dedication and resilience brought you here, and the GEN1 officers couldn't be more proud. This will be a meaningful opportunity to celebrate the accomplishments of the Allen School first-generation community, and we would love for you to join us in recognizing and uplifting our graduates.",
     type: "Social",
-    flyer: null,
-    rsvp: null
+    flyer: flyers.firstGenGrad,
+    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSfXdEoORtRSwgCdHhg_JQhjx1awV4YDE-RlqQdnUTv5FnBFPA/viewform?usp=header"
   },
 ];
 
 const pastEvents = [
   {
-    title: "Badminton/Sports Day",
-    date: "April 11, 2026",
+    title: "Crack the Eggs",
+    date: "April 7, 2026 - April 30, 2026",
     type: "Social",
   },
   {
-    title: "GEN1 x AVELA x ColorStack x MiT Duolingo Info Night",
-    date: "February 17, 2026",
+    title: "Amazon Jr. Dev Information Session",
+    date: "April 16, 2026",
     type: "Career",
   },
   {
-    title: "GEN1 x MiT x WiC x Q++ Valentines & Vibes",
-    date: "February 11, 2026",
+    title: "Badminton/Sports Day",
+    date: "April 11, 2026",
     type: "Social",
   },
 ];
