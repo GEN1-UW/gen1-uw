@@ -13,7 +13,28 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+    {
+      name: "spa-fallback",
+      apply: "serve",
+      configureServer(server) {
+        return () => {
+          server.middlewares.use((req, res, next) => {
+            if (
+              req.method === "GET" &&
+              !req.url.includes(".") &&
+              req.url !== "/"
+            ) {
+              req.url = "/";
+            }
+            next();
+          });
+        };
+      },
+    },
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
