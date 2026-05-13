@@ -3,92 +3,9 @@ import { Footer } from "@/components/layout/Footer";
 import { Calendar, MapPin, Clock, ExternalLink, Image } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-
-const flyers = {
-  sipAndShare: `event-images/sip-and-share.png`,
-  gen1torship: `event-images/gen1torship.png`,
-  crackTheEggs: `event-images/crack-the-eggs.png`,
-  amazonJrDev: `event-images/amazon-jr-dev.png`,
-  firstToFounder: `event-images/first-to-founder.png`,
-  firstGenGrad: `event-images/first-gen-grad.png`
-};
-
-const ongoingEvents = [
-  {
-    title: "Sip and Share",
-    time: "TBD",
-    location: "TBD",
-    description:
-      "We're excited to bring back Sip and Share with a new format this quarter. This is a dedicated space to connect with GEN1 officers, get advice on classes, internships, and navigating UW, and learn what it's like to be part of GEN1. Whether you're looking for guidance or just want to meet more people in the community, this is a great place to start.",
-    type: "Social",
-    flyer: flyers.sipAndShare,
-    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSdWJZY9oHejKXFHX6Nthka0WILWLg6DkhEPoBK1zV-4WUjMeQ/viewform?usp=header"
-  },
-  {
-    title: "GEN1torship",
-    time: "N/A",
-    location: "TBD",
-    description:
-      "GEN1torship is designed to connect first-generation undergraduate students with first-generation alumni mentors, creating a supportive space for learning, growth, and shared experience. Our mentors can offer insight on navigating UW as a first-gen student, pursuing careers in industry or research, and building confidence as you plan your next steps.",
-    type: "Social",
-    flyer: flyers.gen1torship,
-    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSfhcM7k5-yz1-9sMzJNPXem0ndouEbFXiJQI51fhchS6LOxGQ/viewform?usp=header"
-  },
-]
-
-const upcomingEvents = [
-  {
-    title: "Intern Tea",
-    date: "May 5th, 2026",
-    time: "5:30 PM - 7:00 PM",
-    location: "CSE2 G01",
-    description:
-      "Curious about what internships are actually like beyond the application process? Join GEN1 for Intern Tea, a panel where students who interned at different companies (Duolingo, Microsoft, SAS, etc.) will share the real day-to-day of their internship experiences and what helped them succeed once they got there.",
-    type: "Panel",
-    flyer: null,
-    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSe9AwFB_GznYp4VJgVMzI9xSGz1NYBHG34g84plgTyK52axEA/viewform?usp=header"
-  },
-  {
-    title: "First to Founder",
-    date: "May 13, 2026",
-    time: "5:00 PM - 7:00 PM",
-    location: "CSE2 G10",
-    description:
-      "Join us for First to Founder, a panel featuring our incredible speakers David Geller (Founder and CEO of Spryly) and Ken Horenstein (Founder and Partner of Pack Ventures), to learn more about their entrepreneurial journeys and for a chance to connect with them! This will be a truly informative experience, so be sure to join us!",
-    type: "Panel",
-    flyer: flyers.firstToFounder,
-    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSdlz7bz_FpjfX1F1fu2MllODZOmF60jbRS6tis0Jeq1DjNULQ/viewform?usp=header"
-  },
-  {
-    title: "First Gen Grad",
-    date: "June 4, 2026",
-    time: "4:30 PM - 7:00 PM",
-    location: "Zillow Commons",
-    description:
-      "Congratulations to all first-generation Allen School grads! Your dedication and resilience brought you here, and the GEN1 officers couldn't be more proud. This will be a meaningful opportunity to celebrate the accomplishments of the Allen School first-generation community, and we would love for you to join us in recognizing and uplifting our graduates.",
-    type: "Social",
-    flyer: flyers.firstGenGrad,
-    rsvp: "https://docs.google.com/forms/d/e/1FAIpQLSfXdEoORtRSwgCdHhg_JQhjx1awV4YDE-RlqQdnUTv5FnBFPA/viewform?usp=header"
-  },
-];
-
-const pastEvents = [
-  {
-    title: "Crack the Eggs",
-    date: "April 7, 2026 - April 30, 2026",
-    type: "Social",
-  },
-  {
-    title: "Amazon Jr. Dev Information Session",
-    date: "April 16, 2026",
-    type: "Career",
-  },
-  {
-    title: "Badminton/Sports Day",
-    date: "April 11, 2026",
-    type: "Social",
-  },
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import type { Event } from "@/types/event";
 
 const getTypeColor = (type: string) => {
   switch (type) {
@@ -106,6 +23,109 @@ const getTypeColor = (type: string) => {
 };
 
 const Events = () => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*");
+
+    console.log("SUPABASE DATA:", data);
+    console.log("SUPABASE ERROR:", error);
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    const sorted = (data || []).sort((a, b) => {
+      // normalize missing values so they don't break ordering
+      const aEnd = a.end_date ? Date.parse(a.end_date) : Number.POSITIVE_INFINITY;
+      const bEnd = b.end_date ? Date.parse(b.end_date) : Number.POSITIVE_INFINITY;
+
+      if (aEnd !== bEnd) return aEnd - bEnd;
+
+      const aStart = a.start_date ? Date.parse(a.start_date) : Number.POSITIVE_INFINITY;
+      const bStart = b.start_date ? Date.parse(b.start_date) : Number.POSITIVE_INFINITY;
+
+      return aStart - bStart;
+    });
+
+    setEvents(sorted);
+    setLoading(false);
+  };
+
+  const now = new Date();
+
+  const ongoingEvents = events.filter(e => e.status === "ongoing");
+  const upcomingEvents = events.filter(e => e.status === "upcoming");
+  const pastEvents = [...events]
+  .filter(e => e.status === "past")
+  .sort((a, b) => {
+    const aTime = a.end_date
+      ? Date.parse(a.end_date + "T00:00:00Z")
+      : a.start_date
+      ? Date.parse(a.start_date + "T00:00:00Z")
+      : -Infinity;
+
+    const bTime = b.end_date
+      ? Date.parse(b.end_date + "T00:00:00Z")
+      : b.start_date
+      ? Date.parse(b.start_date + "T00:00:00Z")
+      : -Infinity;
+
+    return bTime - aTime; // newest → oldest
+  });
+
+  const formatDateRange = (start?: string | null, end?: string | null) => {
+    const format = (d: string) =>
+      new Date(d).toLocaleDateString("en-US", {
+        timeZone: "UTC",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+
+    if (!start) return "TBD";
+
+    if (!end || end === start) {
+      return format(start);
+    }
+
+    return `${format(start)} - ${format(end)}`;
+  };
+
+  const formatTime = (time?: string | null) => {
+    if (!time) return null;
+
+    const [h, m] = time.split(":");
+    let hour = parseInt(h);
+    const minute = m;
+
+    const ampm = hour >= 12 ? "PM" : "AM";
+    hour = hour % 12 || 12;
+
+    return `${hour}:${minute} ${ampm}`;
+  };
+
+  const formatTimeRange = (
+    start?: string | null,
+    end?: string | null
+  ) => {
+    const startTime = formatTime(start);
+    const endTime = formatTime(end);
+
+    if (!startTime && !endTime) return "TBD";
+    if (startTime && !endTime) return startTime;
+
+    return `${startTime} - ${endTime}`;
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -147,9 +167,9 @@ const Events = () => {
                         ratio={4 / 5}
                         className="bg-muted rounded-xl border-2 border-dashed border-border overflow-hidden"
                       >
-                        {event.flyer ? (
+                        {event.flyer_url ? (
                           <img
-                            src={event.flyer}
+                            src={event.flyer_url}
                             alt={`${event.title} flyer`}
                             className="w-full h-full object-cover"
                           />
@@ -181,18 +201,22 @@ const Events = () => {
                         </p>
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            {formatDateRange(event.start_date, event.end_date)}
+                          </div>
+                          <div className="flex items-center gap-2">
                             <Clock className="w-4 h-4" />
-                            {event.time}
+                            {formatTimeRange(event.start_time, event.end_time)}
                           </div>
                           <div className="flex items-center gap-2">
                             <MapPin className="w-4 h-4" />
-                            {event.location}
+                            {event.location || "TBD"}
                           </div>
                         </div>
                       </div>
-                        {event.rsvp ? (
+                        {event.rsvp_url ? (
                           <a
-                            href={event.rsvp}
+                            href={event.rsvp_url}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -242,9 +266,9 @@ const Events = () => {
                         ratio={4 / 5}
                         className="bg-muted rounded-xl border-2 border-dashed border-border overflow-hidden"
                       >
-                        {event.flyer ? (
+                        {event.flyer_url ? (
                           <img
-                            src={event.flyer}
+                            src={event.flyer_url}
                             alt={`${event.title} flyer`}
                             className="w-full h-full object-cover"
                           />
@@ -277,11 +301,11 @@ const Events = () => {
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
-                            {event.date}
+                            {formatDateRange(event.start_date, event.end_date)}
                           </div>
                           <div className="flex items-center gap-2">
                             <Clock className="w-4 h-4" />
-                            {event.time}
+                            {formatTimeRange(event.start_time, event.end_time)}
                           </div>
                           <div className="flex items-center gap-2">
                             <MapPin className="w-4 h-4" />
@@ -289,9 +313,9 @@ const Events = () => {
                           </div>
                         </div>
                       </div>
-                      {event.rsvp ? (
+                      {event.rsvp_url ? (
                         <a
-                          href={event.rsvp}
+                          href={event.rsvp_url}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -344,7 +368,7 @@ const Events = () => {
                   <h3 className="text-lg font-semibold text-foreground mb-2">
                     {event.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{event.date}</p>
+                  <p className="text-sm text-muted-foreground">{formatDateRange(event.start_date, event.end_date)}</p>
                 </div>
               ))}
             </div>
