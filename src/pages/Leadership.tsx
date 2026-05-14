@@ -93,10 +93,10 @@ const Leadership = () => {
                     pronouns={officer.pronouns}
                     major={officer.major}
                     year={term.year}
-                    favClass={officer.fav_class}
-                    favLang={officer.fav_lang}
-                    askAbout={officer.ask_about}
-                    funFact={officer.fun_fact}
+                    favClass={term.fav_class}
+                    favLang={term.fav_lang}
+                    askAbout={term.ask_about}
+                    funFact={term.fun_fact}
                     linkedIn={officer.linkedin}
                     email={officer.email}
                   />
@@ -136,10 +136,10 @@ const Leadership = () => {
                             pronouns={officer.pronouns}
                             major={officer.major}
                             year={term.year}
-                            favClass={officer.fav_class}
-                            favLang={officer.fav_lang}
-                            askAbout={officer.ask_about}
-                            funFact={officer.fun_fact}
+                            favClass={term.fav_class}
+                            favLang={term.fav_lang}
+                            askAbout={term.ask_about}
+                            funFact={term.fun_fact}
                             linkedIn={officer.linkedin}
                             email={officer.email}
                           />

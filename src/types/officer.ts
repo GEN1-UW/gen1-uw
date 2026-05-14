@@ -4,10 +4,6 @@ type Officer = {
   image: string;
   pronouns: string;
   major: string;
-  fav_class: string;
-  fav_lang: string;
-  ask_about: string;
-  fun_fact: string;
   linkedin: string;
   email: string;
 };
@@ -18,4 +14,8 @@ type OfficerTerm = {
   year_range: string;
   year: string;
   display_order: number;
+  fav_class: string;
+  fav_lang: string;
+  ask_about: string;
+  fun_fact: string;
 };
