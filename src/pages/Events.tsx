@@ -35,9 +35,6 @@ const Events = () => {
       .from("events")
       .select("*");
 
-    console.log("SUPABASE DATA:", data);
-    console.log("SUPABASE ERROR:", error);
-
     if (error) {
       console.error(error);
       return;
