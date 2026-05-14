@@ -1,180 +1,53 @@
 import { Navigation } from "@/components/layout/Navigation";
+import { ExpandableSection } from "@/components/ui/expandable-section";
+import { OfficerCard } from "@/components/ui/officer-card";
 import { Footer } from "@/components/layout/Footer";
 import { Linkedin, Mail, User } from "lucide-react";
-
-const leaders = [
-  {
-    name: "Czarin Dela Cruz",
-    image: "Czarin.png",
-    role: "Chair",
-    pronouns: "she/her",
-    major: "Computer Science & Data Science",
-    year: "Senior",
-    favClass: "CSE 340",
-    favLang: "Java",
-    askAbout: "Current watchlist + Cafes",
-    funFact: "Dream Travel Destination: Tokyo",
-    linkedIn: "czarindc",
-    email: "czarindc@cs.washington.edu"
-  },
-  {
-    name: "Deetya Kamat",
-    image: "Deetya.png",
-    role: "Vice Chair",
-    pronouns: "she/her",
-    major: "Computer Science, Minor in Business Administration",
-    year: "Junior",
-    favClass: "CSE 333",
-    favLang: "Python",
-    askAbout: "My latest read!",
-    funFact: "Dream Travel Destination: Edinburgh",
-    linkedIn: "deetya-kamat",
-    email: "deetyk@cs.washington.edu"
-  },
-  {
-    name: "Krish Doshi",
-    image: "Krish.png",
-    role: "Student Relations",
-    pronouns: "he/him",
-    major: "Computer Science + Statistics (Data Science), Minor in Business Administration and Music",
-    year: "Sophomore",
-    favClass: "CSE 332",
-    favLang: "Java + Python",
-    askAbout: "Husky Marching Band",
-    funFact: "Dream Travel Destination: Japan",
-    linkedIn: "kdoshi2",
-    email: "kdoshi2@cs.washington.edu"
-  },
-  {
-    name: "David Guzman Valente",
-    image: "David.png",
-    role: "Media Director",
-    pronouns: "he/him",
-    major: "Computer Science",
-    year: "Junior",
-    favClass: "CSE 457",
-    favLang: "C++, C#",
-    askAbout: "Animes",
-    funFact: "Favorite Song: Dile Que Tu Quieres by Ozuna",
-    linkedIn: "dguzval",
-    email: "dguzval2@uw.edu"
-  },
-  {
-    name: "Kevin Kim",
-    image: "Kevin.png",
-    role: "Public Relations",
-    pronouns: "he/him",
-    major: "Computer Science + Economics, Minor in Entrepreneurship",
-    year: "Junior",
-    favClass: "CSE 344",
-    favLang: "Java",
-    askAbout: "Investments, Korea",
-    funFact: "Fun Fact: I can whistle any song",
-    linkedIn: "kevkim27",
-    email: "kevi0201@cs.washington.edu"
-  },
-  {
-    name: "Vanya Jain",
-    image: "Vanya.png",
-    role: "Graphics Director",
-    pronouns: "she/her",
-    major: "Computer Science",
-    year: "Sophomore",
-    favClass: "CSE 311",
-    favLang: "Javascript",
-    askAbout: "Music + Coffee",
-    funFact: "Favorite TV Show: Severance",
-    linkedIn: "vanyajn",
-    email: "vanyaj@cs.washington.edu"
-  },
-  {
-    name: "Gordon Huang",
-    image: "Gordon.png",
-    role: "Treasurer",
-    pronouns: "he/him",
-    major: "Computer Science, Minor in Data Science",
-    year: "Senior",
-    favClass: "CSE 473",
-    favLang: "Java",
-    askAbout: "My study abroad in Japan",
-    funFact: "Ultimate Comfort Food: Miso ramen + soft boiled egg",
-    linkedIn: "gordondhuang",
-    email: "gdhua@cs.washington.edu"
-  },
-  {
-    name: "Christy Nguyen",
-    image: "Christy.png",
-    role: "Media Director",
-    pronouns: "she/her",
-    major: "Computer Science",
-    year: "Junior",
-    favClass: "CSE 332",
-    favLang: "Typescript",
-    askAbout: "The best view points",
-    funFact: "Ultimate Comfort Food: Taco Time",
-    linkedIn: "christynguyen23",
-    email: "cnguy@uw.edu"
-  },
-  {
-    name: "Mira Lee",
-    image: "Mira.png",
-    role: "Public Relations",
-    pronouns: "she/her",
-    major: "Computer Science",
-    year: "Junior",
-    favClass: "CSE 332",
-    favLang: "Python",
-    askAbout: "Hikes in WA",
-    funFact: "Ultimate Comfort Food: Boiling Point",
-    linkedIn: "miracle-lee1",
-    email: "ml284@cs.washington.edu"
-  },
-  {
-    name: "Becky Jiang",
-    image: "Becky.png",
-    role: "GEN1ntern",
-    pronouns: "she/her",
-    major: "Computer Science",
-    year: "Sophomore",
-    favClass: "CSE 311",
-    favLang: "Java",
-    askAbout: "Hikes in WA, Tennis",
-    funFact: "Ultimate Comfort Food: Tomato Egg Stir-fry",
-    linkedIn: "beckyjiang",
-    email: "beckyj11@cs.washington.edu"
-  },
-  {
-    name: "Raiden Santos",
-    image: "Raiden.png",
-    role: "GEN1ntern",
-    pronouns: "he/him",
-    major: "Computer Science + Philosophy",
-    year: "Junior",
-    favClass: "CSE 331",
-    favLang: "Python",
-    askAbout: "Billiards, Boxing",
-    funFact: "Fun Fact: I have a life-sized Bruce Lee statue",
-    linkedIn: "raidensantos",
-    email: "raidens@cs.washington.edu"
-  },
-  {
-    name: "Michael Lin",
-    image: "Michael.png",
-    role: "GEN1ntern",
-    pronouns: "he/him",
-    major: "Computer Science",
-    year: "Freshman",
-    favClass: "CSE 121",
-    favLang: "Python",
-    askAbout: "Food spots @ UW",
-    funFact: "Fun Fact: I've been to 23 countries",
-    linkedIn: "michael-lin07",
-    email: "mlin36@cs.washington.edu"
-  },
-];
+import { useState } from "react";
+import { useOfficers } from "@/hooks/use-officers";
+import type { Officer, OfficerTerm } from "@/types/officer";
 
 const Leadership = () => {
   const baseUrl = import.meta.env.BASE_URL;
+  const [showPast, setShowPast] = useState(false);
+  const { officers = [], terms = [], loading } = useOfficers();
+
+  const getCurrentSchoolYear = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+
+    // School year rolls over in September
+    return month >= 8
+      ? `${year}-${year + 1}`
+      : `${year - 1}-${year}`;
+  };
+
+  const currentYear = getCurrentSchoolYear();
+
+  const currentTerms = terms
+  .filter((t) => t.year_range === currentYear)
+  .slice()
+  .sort((a, b) => a.display_order - b.display_order);
+
+  const groupedPast = terms.reduce<Record<string, OfficerTerm[]>>(
+    (acc, term) => {
+      if (term.year_range === currentYear) return acc;
+
+      if (!acc[term.year_range]) {
+        acc[term.year_range] = [];
+      }
+
+      acc[term.year_range].push(term);
+
+      return acc;
+    },
+    {}
+  );
+
+  const officerMap = Object.fromEntries(
+    officers.map((o) => [o.id, o])
+  );
 
   return (
     <div className="min-h-screen">
@@ -198,85 +71,87 @@ const Leadership = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-              {leaders.map((leader) => (
-                <div
-                  key={leader.name}
-                  className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-xl transition-all"
-                >
-                  {/* Officer Photo */}
-                  <div className="w-44 h-44 rounded-full bg-secondary border-4 border-lavender/50 mb-5 mx-auto group-hover:scale-105 group-hover:border-primary/50 transition-all overflow-hidden">
-                    <img
-                      src={`${baseUrl}leadership-images/${leader.image}`}
-                      alt={leader.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  
-                  <div className="text-center">
-                    <h3 className="text-xl font-semibold text-foreground mb-1">
-
-                      {leader.name}
-                    </h3>
-                    <p className="text-primary font-medium text-base mb-1">{leader.role}</p>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {leader.pronouns}
-                    </p>
-                    
-                    <div className="space-y-2 text-left bg-secondary/50 rounded-lg p-3 mb-4">
-                      <p className="text-sm">
-                        <span className="font-medium text-foreground">Major:</span>{" "}
-                        <span className="text-muted-foreground">{leader.major}</span>
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-medium text-foreground">Year:</span>{" "}
-                        <span className="text-muted-foreground">{leader.year}</span>
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-medium text-foreground">Fav Class:</span>{" "}
-                        <span className="text-muted-foreground">{leader.favClass}</span>
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-medium text-foreground">Fav Language:</span>{" "}
-                        <span className="text-muted-foreground">{leader.favLang}</span>
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-medium text-foreground">Ask Me About:</span>{" "}
-                        <span className="text-muted-foreground">{leader.askAbout}</span>
-                      </p>
-                    </div>
-
-                    <p className="text-sm text-accent font-medium italic mb-4">
-                      {leader.funFact}
-                    </p>
-                    
-                    <div className="flex justify-center gap-2">
-                      {leader.linkedIn && (
-                        <a
-                          href={`https://www.linkedin.com/in/${leader.linkedIn}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-8 h-8 rounded-full bg-secondary hover:bg-primary/10 flex items-center justify-center transition-colors"
-                          aria-label="LinkedIn"
-                        >
-                          <Linkedin className="w-4 h-4 text-muted-foreground" />
-                        </a>
-                      )}
-                      {leader.email && (
-                        <a
-                          href={`mailto:${leader.email}`}
-                          className="w-8 h-8 rounded-full bg-secondary hover:bg-primary/10 flex items-center justify-center transition-colors"
-                          aria-label="Email"
-                        >
-                          <Mail className="w-4 h-4 text-muted-foreground" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
+              {loading ? (
+                <div className="col-span-full text-center text-muted-foreground">
+                  Loading officers...
                 </div>
-              ))}
+              ) : officers.length === 0 ? (
+                <div className="col-span-full text-center text-muted-foreground">
+                  No officers found.
+                </div>
+              ) : (
+              currentTerms.map((term) => {
+                const officer = officerMap[term.officer_id];
+                if (!officer) return null;
+
+                return (
+                  <OfficerCard
+                    key={`${term.officer_id}-${term.year_range}`}
+                    name={officer.name}
+                    image={officer.image}
+                    role={term.role}
+                    pronouns={officer.pronouns}
+                    major={officer.major}
+                    year={term.year}
+                    favClass={officer.fav_class}
+                    favLang={officer.fav_lang}
+                    askAbout={officer.ask_about}
+                    funFact={officer.fun_fact}
+                    linkedIn={officer.linkedin}
+                    email={officer.email}
+                  />
+                );
+              })
+            )}
             </div>
           </div>
         </section>
+
+        {/* Past Leadership */}
+        <ExpandableSection title="See past leadership">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="space-y-10">
+              {(Object.entries(groupedPast) as [string, OfficerTerm[]][])
+                .sort(([a], [b]) => b.localeCompare(a))
+                .map(([yearRange, group]) => (
+                  <div key={yearRange}>
+                    <h3 className="text-2xl font-semibold text-foreground mb-6 text-center">
+                      {yearRange} Leadership
+                    </h3>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {group
+                        .slice()
+                        .sort((a, b) => a.display_order - b.display_order)
+                        .map((term) => {
+                        const officer = officerMap[term.officer_id];
+                        if (!officer) return null;
+
+                        return (
+                          <OfficerCard
+                            key={`${term.officer_id}-${term.year_range}`}
+                            name={officer.name}
+                            image={officer.image}
+                            role={term.role}
+                            pronouns={officer.pronouns}
+                            major={officer.major}
+                            year={term.year}
+                            favClass={officer.fav_class}
+                            favLang={officer.fav_lang}
+                            askAbout={officer.ask_about}
+                            funFact={officer.fun_fact}
+                            linkedIn={officer.linkedin}
+                            email={officer.email}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </ExpandableSection>
+        
 
         {/* Join Leadership */}
         <section className="py-24 bg-background">
