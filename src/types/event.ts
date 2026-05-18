@@ -5,8 +5,6 @@ export type Event = {
 
   type: 'Social' | 'Workshop' | 'Career' | 'Panel';
 
-  status: 'upcoming' | 'ongoing' | 'past';
-
   start_date: string | null;
   end_date: string | null;
 
@@ -19,4 +17,5 @@ export type Event = {
 
   start_time: string | null;
   end_time: string | null;
+  ongoing?: boolean | null;
 };

@@ -16,10 +16,15 @@ export function ExpandableSection({
   return (
     <div className="w-full">
       {/* Toggle Button */}
-      <div className="flex justify-center mt-10">
+      <div className="group flex justify-center mt-10">
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition font-medium"
+          className="group flex items-center gap-3 px-5 py-2 rounded-full 
+                    bg-purple-50 text-purple-700 
+                    hover:bg-purple-100 hover:text-purple-800 
+                    transition-all duration-200 
+                    font-medium shadow-sm hover:shadow-md 
+                    active:scale-[0.98]"
           aria-expanded={open}
         >
           {/* Left icon */}
@@ -29,15 +34,17 @@ export function ExpandableSection({
             height="14"
             fill="currentColor"
             viewBox="0 0 16 16"
-            className="animate-bounce [animation-duration:1.8s] leading-none"
+            className={`animate-bounce [animation-duration:1.8s] leading-none opacity-70 group-hover:opacity-100 transition ${
+              open ? "rotate-180" : ""
+            }`}
           >
             <path
               fillRule="evenodd"
-              d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-            />
-            <path
-              fillRule="evenodd"
-              d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              d={
+                open
+                  ? "M1.646 11.354a.5.5 0 0 0 .708 0L8 5.707l5.646 5.647a.5.5 0 0 0 .708-.708l-6-6a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 0 .708"
+                  : "M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              }
             />
           </svg>
 
@@ -50,15 +57,17 @@ export function ExpandableSection({
             height="14"
             fill="currentColor"
             viewBox="0 0 16 16"
-            className="animate-bounce [animation-duration:1.8s] [animation-delay:150ms] leading-none"
+            className={`animate-bounce [animation-duration:1.8s] [animation-delay:150ms] leading-none opacity-70 group-hover:opacity-100 transition ${
+              open ? "rotate-180" : ""
+            }`}
           >
             <path
               fillRule="evenodd"
-              d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-            />
-            <path
-              fillRule="evenodd"
-              d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              d={
+                open
+                  ? "M1.646 11.354a.5.5 0 0 0 .708 0L8 5.707l5.646 5.647a.5.5 0 0 0 .708-.708l-6-6a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 0 .708"
+                  : "M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              }
             />
           </svg>
         </button>
