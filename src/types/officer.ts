@@ -1,4 +1,4 @@
-type Officer = {
+export type Officer = {
   id: number;
   name: string;
   image: string;
@@ -8,7 +8,7 @@ type Officer = {
   email: string;
 };
 
-type OfficerTerm = {
+export type OfficerTerm = {
   officer_id: number;
   role: string;
   year_range: string;

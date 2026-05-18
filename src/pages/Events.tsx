@@ -59,25 +59,42 @@ const Events = () => {
 
   const now = new Date();
 
-  const ongoingEvents = events.filter(e => e.status === "ongoing");
-  const upcomingEvents = events.filter(e => e.status === "upcoming");
-  const pastEvents = [...events]
-  .filter(e => e.status === "past")
-  .sort((a, b) => {
-    const aTime = a.end_date
-      ? Date.parse(a.end_date + "T00:00:00Z")
-      : a.start_date
-      ? Date.parse(a.start_date + "T00:00:00Z")
-      : -Infinity;
+  // Explicitly marked ongoing
+  const ongoingEvents = events.filter((e) => e.ongoing === true);
 
-    const bTime = b.end_date
-      ? Date.parse(b.end_date + "T00:00:00Z")
-      : b.start_date
-      ? Date.parse(b.start_date + "T00:00:00Z")
-      : -Infinity;
+  // Everything NOT explicitly ongoing
+  const nonOngoingEvents = events.filter((e) => e.ongoing !== true);
 
-    return bTime - aTime; // newest → oldest
+  const upcomingEvents = nonOngoingEvents.filter((event) => {
+    // No date yet → treat as upcoming
+    if (!event.start_date) return true;
+
+    const start = new Date(event.start_date + "T00:00:00");
+
+    return now < start;
   });
+
+  const pastEvents = [...nonOngoingEvents]
+    .filter((event) => {
+      if (!event.end_date && !event.start_date) return false;
+
+      const end = event.end_date
+        ? new Date(event.end_date + "T23:59:59")
+        : new Date(event.start_date + "T23:59:59");
+
+      return now > end;
+    })
+    .sort((a, b) => {
+      const aTime = a.end_date
+        ? Date.parse(a.end_date)
+        : Date.parse(a.start_date || "");
+
+      const bTime = b.end_date
+        ? Date.parse(b.end_date)
+        : Date.parse(b.start_date || "");
+
+      return bTime - aTime;
+    });
 
   const formatDateRange = (start?: string | null, end?: string | null) => {
     const format = (d: string) =>
