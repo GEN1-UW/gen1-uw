@@ -1,8 +1,8 @@
-# Welcome to your Lovable project
+# Welcome to GEN1's official website. 
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**URL**: https://gen1.cs.washington.edu/
 
 ## How can I edit this code?
 
