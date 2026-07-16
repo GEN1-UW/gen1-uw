@@ -102,3 +102,5 @@ This project can be deployed to any static hosting provider that supports Vite b
 ```bash
 npm run build
 ```
+
+Thank you to everyone contributing to GEN1 and helping support first-generation students in the UW CSE community.
