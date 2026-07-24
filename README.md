@@ -15,10 +15,6 @@ The app is a React and TypeScript site built with Vite, Tailwind CSS, and shadcn
 ## Tech stack
 
 - Vite
-- React 18
-- TypeScript
-- React Router
-- Tailwind CSS
 - shadcn/ui and Radix UI
 - Supabase client
 - Vitest and Testing Library
