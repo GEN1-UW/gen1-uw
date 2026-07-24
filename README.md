@@ -2,10 +2,7 @@
 
 This repository contains the website for GEN1, a student organization at the University of Washington’s Paul G. Allen School of Computer Science & Engineering. The site highlights the group’s mission, leadership, events, resources, and ways to connect with the community.
 
-## Overview
-
-The app is a React and TypeScript site built with Vite, Tailwind CSS, and shadcn/ui. It includes a responsive landing page plus dedicated pages for:
-
+## 
 - About
 - Events
 - Resources
