@@ -1,9 +1,7 @@
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
-import { Mail, MapPin, Instagram, Linkedin, Facebook } from "lucide-react";
+import { Mail, MapPin, Instagram, Linkedin, Facebook, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import type { SocialLink } from "@/types/social";
 
 const socialLinks: SocialLink[] = [
@@ -27,7 +25,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     name: "Discord",
-    icon: faDiscord,
+    icon: MessageCircle,
     href: "https://discord.gg/pVY7egry8q",
     handle: "GEN1 Discord Server",
   },
@@ -109,14 +107,9 @@ const Contact = () => {
                     className="flex items-center gap-4 p-4 rounded-xl bg-secondary hover:bg-secondary/80 transition-colors group"
                   >
                     <div className="w-10 h-10 rounded-lg bg-card flex items-center justify-center">
-                      {/* FontAwesome icons have 'prefix' property, Lucide icons don't */}
                       {social.icon && (
-                      'prefix' in social.icon ? (
-                        <FontAwesomeIcon icon={social.icon} className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                      ) : (
                         <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                      )
-                    )}
+                      )}
                     </div>
                     <div>
                       <div className="font-medium text-foreground">

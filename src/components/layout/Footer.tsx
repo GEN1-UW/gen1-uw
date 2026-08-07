@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Mail } from "lucide-react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import type { SocialLink } from "@/types/social";
 
 const socialLinks: SocialLink[] = [
   { name: "Instagram", icon: Instagram, href: "https://instagram.com/gen1cse" },
   { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/gen1-uw" },
   { name: "Email", icon: Mail, href: "mailto:gen1@cs.washington.edu" },
-  { name: "Discord", icon: faDiscord, href: "https://discord.gg/pVY7egry8q" },
+  { name: "Discord", icon: MessageCircle, href: "https://discord.gg/pVY7egry8q" },
 ];
 
 const footerLinks = [
@@ -72,14 +70,7 @@ export const Footer = () => {
                   className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors"
                   aria-label={social.name}
                 >
-                  {/* Render FontAwesome or Lucide icon based on type */}
-                  {social.icon && (
-                    'prefix' in social.icon ? (
-                      <FontAwesomeIcon icon={social.icon} className="w-5 h-5" />
-                    ) : (
-                      <social.icon className="w-5 h-5" />
-                    )
-                  )}
+                  {social.icon && <social.icon className="w-5 h-5" />}
                 </a>
               ))}
             </div>
